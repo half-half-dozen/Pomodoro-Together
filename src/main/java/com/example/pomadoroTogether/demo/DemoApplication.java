@@ -6,19 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
+
 @SpringBootApplication
 @RestController
 public class DemoApplication {
 
-	public static void main(String[] args)
-	{
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-	@GetMapping("/food")//this is the address to reach "favFood", i.e. http://localhost:8080/food
-	public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)//format: http://localhost:8080/food?=<insert value here>
-	{
-		return ("Your favorite food is : " + food);
-	}
+    @GetMapping("/food")//this is the address to reach "favFood", i.e. http://localhost:8080/food
+    public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)//format: http://localhost:8080/food?=<insert value here>
+    {
+        return ("Your favorite food is : " + food);
+    }
+
+    @GetMapping("/dice")//this is the address to roll a dice, i.e. http://localhost:8080/dice
+    public String dice() {
+        Random random = new Random();
+        int num = random.nextInt(6) + 1;
+        return ("You rolled a " + String.valueOf(num) + ".");
+    }
 
 }

@@ -15,8 +15,8 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@GetMapping("/food")
-	public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)
+	@GetMapping("/food")//this is the address to reach "favFood", i.e. http://localhost:8080/food
+	public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)//format: http://localhost:8080/food?=<insert value here>
 	{
 		return ("Your favorite food is " + food);
 	}

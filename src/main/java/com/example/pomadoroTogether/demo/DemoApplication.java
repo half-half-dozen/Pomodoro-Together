@@ -5,7 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.Random;
 
 @SpringBootApplication
@@ -13,6 +18,7 @@ import java.util.Random;
 public class DemoApplication {
 
     public static void main(String[] args) {
+        imageGrabber("https://www.google.com");
         SpringApplication.run(DemoApplication.class, args);
     }
 
@@ -29,4 +35,28 @@ public class DemoApplication {
         return ("You rolled a " + String.valueOf(num) + ".");
     }
 
+    public static void imageGrabber(String website)
+    {
+        Document doc;
+        try {
+
+            //get all images
+            doc = Jsoup.connect(website).get();
+            Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+            for (Element image : images) {
+
+                System.out.println("\nsrc : " + image.attr("src"));
+                System.out.println("height : " + image.attr("height"));
+                System.out.println("width : " + image.attr("width"));
+                System.out.println("alt : " + image.attr("alt"));
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
+

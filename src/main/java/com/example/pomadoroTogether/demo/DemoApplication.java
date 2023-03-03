@@ -10,6 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,41 +25,54 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @GetMapping("/food")//this is the address to reach "favFood", i.e. http://localhost:8080/food
-    public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)//format: http://localhost:8080/food?=<insert value here>
+    @GetMapping("/food") // this is the address to reach "favFood", i.e. http://localhost:8080/food
+    public String favFood(@RequestParam(value = "food", defaultValue = "Plain Bread") String food)// format:
+                                                                                                  // http://localhost:8080/food?=<insert
+                                                                                                  // value here>
     {
         return ("Your favorite food is : " + food);
     }
 
-    @GetMapping("/dice")//this is the address to roll a dice, i.e. http://localhost:8080/dice
+    @GetMapping("/dice") // this is the address to roll a dice, i.e. http://localhost:8080/dice
     public String dice() {
         Random random = new Random();
         int num = random.nextInt(6) + 1;
         return ("You rolled a " + String.valueOf(num) + ".");
     }
 
-    public static void imageGrabber(String website)
-    {
-        Document doc;
+    // public static void imageGrabber(String website)
+    // {
+    // Document doc;
+    // try {
+
+    // //get all images
+    // doc = Jsoup.connect(website).get();
+    // Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+    // for (Element image : images) {
+
+    // System.out.println("\nsrc : " + image.attr("src"));
+    // System.out.println("height : " + image.attr("height"));
+    // System.out.println("width : " + image.attr("width"));
+    // System.out.println("alt : " + image.attr("alt"));
+
+    // }
+
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+
+    // }
+
+    // this is the address that reads a local file, and displays it
+    // i.e. http://localhost:8080/read-file?=<insert value here>
+    @GetMapping("/read-file")
+    public String helloWorldFile(@RequestParam(value = "file", defaultValue = "test") String fileName) {
         try {
-
-            //get all images
-            doc = Jsoup.connect(website).get();
-            Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
-            for (Element image : images) {
-
-                System.out.println("\nsrc : " + image.attr("src"));
-                System.out.println("height : " + image.attr("height"));
-                System.out.println("width : " + image.attr("width"));
-                System.out.println("alt : " + image.attr("alt"));
-
-            }
-
+            String fileContent = FileUtils.readFileToString(new File(fileName + ".txt"), "UTF-8");
+            return fileContent;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.print(e.toString());
+            return "File error.";
         }
-
     }
-
 }
-

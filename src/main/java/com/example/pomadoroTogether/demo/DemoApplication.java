@@ -40,28 +40,28 @@ public class DemoApplication {
         return ("You rolled a " + String.valueOf(num) + ".");
     }
 
-    // public static void imageGrabber(String website)
-    // {
-    // Document doc;
-    // try {
+    public static void imageGrabber(String website)
+    {
+    Document doc;
+    try {
 
-    // //get all images
-    // doc = Jsoup.connect(website).get();
-    // Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
-    // for (Element image : images) {
+    //get all images
+    doc = Jsoup.connect(website).get();
+    Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+    for (Element image : images) {
 
-    // System.out.println("\nsrc : " + image.attr("src"));
-    // System.out.println("height : " + image.attr("height"));
-    // System.out.println("width : " + image.attr("width"));
-    // System.out.println("alt : " + image.attr("alt"));
+    System.out.println("\nsrc : " + image.attr("src"));
+    System.out.println("height : " + image.attr("height"));
+    System.out.println("width : " + image.attr("width"));
+    System.out.println("alt : " + image.attr("alt"));
 
-    // }
+    }
 
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
+    } catch (IOException e) {
+    e.printStackTrace();
+    }
 
-    // }
+    }
 
     // this is the address that reads a local file, and displays it
     // i.e. http://localhost:8080/read-file?=<insert value here>

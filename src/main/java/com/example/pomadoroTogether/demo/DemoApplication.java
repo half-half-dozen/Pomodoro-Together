@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.apache.commons.math3.primes.Primes;
 
 import org.apache.commons.io.FileUtils;
 import java.io.File;
@@ -75,4 +76,9 @@ public class DemoApplication {
             return "File error.";
         }
     }
+
+    public boolean isPrime(int x){
+        return isPrime(x);
+    }
+
 }
